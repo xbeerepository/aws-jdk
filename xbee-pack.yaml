@@ -1,0 +1,27 @@
+schema-version: 1.0
+
+const:
+  javaHome: "{% installDir %}/jdk"
+  srcDir: /src
+
+var:
+  version: 8
+  user: default
+
+provision:
+  - url: 
+      from: https://corretto.aws/downloads/latest/amazon-corretto-{% version %}-x64-linux-jdk.tar.gz
+      after: "{{ .templates }}/link.sh"
+  - env: JAVA_HOME={% javaHome %}
+  - systempath: "{% javaHome %}/bin"
+
+
+user: "{% user %}"
+directory: "{% srcDir %}"
+env: JAVA_TOOL_OPTIONS
+persistent-dir: src:"{% srcDir %}"
+
+command:
+  javac: javac {{ .args }}
+  java: java {{ .args }}
+
