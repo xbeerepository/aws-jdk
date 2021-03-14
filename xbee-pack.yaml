@@ -16,10 +16,9 @@ provision:
   - systempath: "{% javaHome %}/bin"
 
 
-user: "{% user %}"
 directory: "{% srcDir %}"
-env: JAVA_TOOL_OPTIONS
-persistent-dir: src:"{% srcDir %}"
+user: "{% user %}"
+persistent-dir: src:"{% srcDir %}":.
 
 command:
   javac: javac {{ .args }}
