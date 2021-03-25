@@ -18,7 +18,7 @@ provision:
 
 directory: "{% srcDir %}"
 user: "{% user %}"
-persistent-dir: src:"{% srcDir %}":.
+volume: src:"{% srcDir %}":.
 
 command:
   javac: javac {{ .args }}
