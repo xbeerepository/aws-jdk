@@ -5,7 +5,7 @@ const:
   srcDir: /src
 
 var:
-  version: 8
+  version: 11 
   user: default
 
 provision:
