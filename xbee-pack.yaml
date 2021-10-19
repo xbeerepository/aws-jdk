@@ -3,20 +3,19 @@ schema-version: 1.0
 description: |
   This xbee pack installs various versions of OpenJDK Corretto distribution.
   By default, OpenJDK 11 is installed, but you can override version variable.
-  Supported JDK versions are: 8,11,16
+  Supported JDK versions are: 8,11,15,16,17
 
-  Example: xbee register aws-jdk --var version=16
+  Example: xbee provision --var version=8.302.08.1 --alias jdk8
 
 const:
   javaHome: "{% installDir %}/jdk"
   app: /app
 
 var:
-  version: 11 
+  version: 11.0.12.7.1
   user: default
-
 provision:
-  - url: https://corretto.aws/downloads/latest/amazon-corretto-{% version %}-x64-linux-jdk.tar.gz
+  - url: https://corretto.aws/downloads/resources/{% version %}/amazon-corretto-{% version %}-linux-x64.tar.gz
     after: "{{ .templates }}/link.sh"
   - env: JAVA_HOME={% javaHome %}
   - systempath: "{% javaHome %}/bin"
