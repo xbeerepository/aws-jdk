@@ -9,21 +9,14 @@ description: |
 
 const:
   javaHome: "{% installDir %}/jdk"
-  app: /app
 
 var:
   version: 11.0.12.7.1
-  user: default
 provision:
   - url: https://corretto.aws/downloads/resources/{% version %}/amazon-corretto-{% version %}-linux-x64.tar.gz
     after: "{{ .templates }}/link.sh"
   - env: JAVA_HOME={% javaHome %}
   - systempath: "{% javaHome %}/bin"
-
-
-directory: "{% app %}"
-user: "{% user %}"
-volume: app:"{% app %}":.
 
 command:
   javac: javac {{ .args }}
