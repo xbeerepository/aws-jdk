@@ -10,8 +10,9 @@ description: |
 const:
   javaHome: "{% installDir %}/jdk"
 
-var:
+in:
   version: 11.0.12.7.1
+  
 provision:
   - url: https://corretto.aws/downloads/resources/{% version %}/amazon-corretto-{% version %}-linux-x64.tar.gz
     after: "{{ .templates }}/link.sh"
