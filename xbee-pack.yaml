@@ -8,16 +8,16 @@ description: |
   Example: xbee provision --var version=8.302.08.1 --alias jdk8
 
 const:
-  javaHome: "{% installDir %}/jdk"
+  javaHome: "/opt/jdk"
 
-in:
+var:
   version: 11.0.12.7.1
   
 provision:
-  - url: https://corretto.aws/downloads/resources/{% version %}/amazon-corretto-{% version %}-linux-x64.tar.gz
+  - url: https://corretto.aws/downloads/resources/{{ .version }}/amazon-corretto-{{ .version }}-linux-x64.tar.gz
     after: "{{ .templates }}/link.sh"
-  - env: JAVA_HOME={% javaHome %}
-  - systempath: "{% javaHome %}/bin"
+  - env: JAVA_HOME={{ .javaHome }}
+  - systempath: "{{ .javaHome }}/bin"
 
 command:
   javac: javac {{ .args }}
