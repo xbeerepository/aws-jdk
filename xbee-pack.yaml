@@ -11,10 +11,10 @@ const:
   javaHome: "/opt/jdk"
 
 var:
-  version: 11.0.12.7.1
+  version: 11
   
 provision:
-  - url: https://corretto.aws/downloads/resources/{{ .version }}/amazon-corretto-{{ .version }}-linux-x64.tar.gz
+  - url: https://corretto.aws/downloads/latest/amazon-corretto-{{ .version }}-x64-linux-jdk.tar.gz
     after: "{{ .templates }}/link.sh"
   - env: JAVA_HOME={{ .javaHome }}
   - systempath: "{{ .javaHome }}/bin"
