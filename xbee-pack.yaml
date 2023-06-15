@@ -20,6 +20,6 @@ provision:
   - systempath: "{{ .javaHome }}/bin"
 
 command:
-  javac: javac {{ .args }}
-  java: java {{ .args }}
+  javac: javac
+  java: java
 
