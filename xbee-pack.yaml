@@ -18,7 +18,6 @@ provision:
     after: "{{ .templates }}/link.sh"
   - env: JAVA_HOME={{ .javaHome }}
   - systempath: "{{ .javaHome }}/bin"
-
 command:
   javac: javac
   java: java
