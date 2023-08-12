@@ -15,7 +15,7 @@ var:
   
 provision:
   - url: https://corretto.aws/downloads/latest/amazon-corretto-{{ .version }}-x64-linux-jdk.tar.gz
-    after: "{{ .templates }}/link.sh"
+    after: "{{ .xbee.templates }}/link.sh"
   - env: JAVA_HOME={{ .javaHome }}
   - systempath: "{{ .javaHome }}/bin"
 command:
