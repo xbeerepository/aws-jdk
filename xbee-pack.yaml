@@ -12,10 +12,10 @@ const:
 
 var:
   xbee:
-    version: 11
+    version: 25
   
 provision:
-  - url: https://corretto.aws/downloads/latest/amazon-corretto-{{ .xbee.version }}-x64-linux-jdk.tar.gz
+  - url: https://corretto.aws/downloads/latest/amazon-corretto-{{ .xbee.version }}-{{ mapArch .xbee.arch }}-linux-jdk.tar.gz
     after: "{{ .xbee.templates }}/link.sh"
   - env: JAVA_HOME={{ .javaHome }}
   - systempath: "{{ .javaHome }}/bin"
