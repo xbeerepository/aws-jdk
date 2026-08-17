@@ -8,7 +8,7 @@ description: |
   Example: xbee provision --var version=8.302.08.1 --alias jdk8
 
 const:
-  javaHome: "/opt/jdk"
+  javaHome: "{{ .xbee.install }}/jdk"
 
 var:
   xbee:
