@@ -1,21 +1,27 @@
 schema-version: 1.0
 
 description: |
-  This xbee pack installs various versions of OpenJDK Corretto distribution.
-  By default, OpenJDK 11 is installed, but you can override version variable.
-  Supported JDK versions are: 8,11,15,16,17
-
-  Example: xbee provision --var version=8.302.08.1 --alias jdk8
+  Installs Amazon Corretto 25.0.4.7.1 from a versioned archive, verified
+  against the SHA-256 published in the official release:
+  https://github.com/corretto/corretto-25/releases/tag/25.0.4.7.1
+  Tested target: Linux/amd64. The release checksum for Linux/arm64 is also
+  provided. Changing xbee.version requires updating archiveSha256 as well.
+  Requires an xbee guest binary supporting url.sha256.
 
 const:
   javaHome: "{{ .xbee.install }}/jdk"
 
 var:
   xbee:
-    version: 25
+    version: "25.0.4.7.1"
+  archiveSha256:
+    amd64: 1d03a3bd5091728492d92f0ef341aca7d8885ece9a150119558f3e3d62b58745
+    arm64: 90a07c1c693ac9333a8a6ec79432f0d13c0564fec6617b0222d43f86858f65b8
   
 provision:
-  - url: https://corretto.aws/downloads/latest/amazon-corretto-{{ .xbee.version }}-{{ mapArch .xbee.arch }}-linux-jdk.tar.gz
+  - url:
+      from: https://corretto.aws/downloads/resources/{{ .xbee.version }}/amazon-corretto-{{ .xbee.version }}-linux-{{ mapArch .xbee.arch }}.tar.gz
+      sha256: '{{ index .archiveSha256 .xbee.arch }}'
     after: "{{ .xbee.templates }}/link.sh"
   - env: JAVA_HOME={{ .javaHome }}
   - systempath: "{{ .javaHome }}/bin"
